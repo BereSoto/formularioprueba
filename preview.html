@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Formulario prueba</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <form action="">
+    <label>Formulario Prueba</label>
+    <input type="text" name="name" placeholder="NOMBRE" autocomplete="off" required />
+    <input type="password" name="empresa" placeholder="EMPRESA" autocomplete="off" required />
+    <input type="password" name="telefono" placeholder="TELEFONO" autocomplete="off" required />
+    <input type="password" name="email" placeholder="EMAIL" autocomplete="off" required />
+    <input type="temas" name="temas" placeholder="TEMAS" autocomplete="off" required/>
+    <button type="submit">Enviar</button>
+  </form>
+  <div class="overlay" id="overlay"></div>
+
+  <script>
+    const $inputList = document.querySelectorAll('input')
+    const $overlay = document.querySelector('#overlay')
+    $inputList.forEach($input => {
+      $input.addEventListener('focus', focus)
+      $input.addEventListener('blur', blur)
+    })
+    $overlay.addEventListener('click', (event) => {
+      console.log(event)
+      $overlay.classList.remove('is-active')
+      const $maybeIsAnInput = document.elementFromPoint(event.clientX, event.clientY)
+      if ($maybeIsAnInput.tagName === 'INPUT') {
+        $maybeIsAnInput.focus()
+      }
+    })
+    function focus(event) {
+      console.log('focus')
+      event.target.classList.add('is-active')
+      $overlay.classList.add('is-active')
+    }
+    function blur(event) {
+      console.log('blur')
+      event.target.classList.remove('is-active')
+      
+    }
+  </script>
+</body>
+
+</html>
